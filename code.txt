@@ -1,0 +1,77 @@
+79GUH-ZDECP-YPLX8-FLFU9-V96AR
+
+20250513
+   똑같은거
+   double num = new int 10;
+   int num2 = (int)num;
+
+   double(실수)은 int(정수)보다 상위 개념 (상위 클래스) 이므로 int 값을 double에 대입 할 수 있다.
+   하지만 double을 int에 대입 하려면 'int형 아닌고 double 인거 아는데 그냥 int로 변환해서 넣어라' 라고 말해줘야 넣을수있다.
+
+   Machine something1 = new Computer();
+   Phone something2 = (Phone)something1;
+   컴퓨터를 기계로 추상화 해서 기계로 업캐스팅이 가능하지만
+   그 기계를 다시 핸드폰으로 다운캐스팅하지는 못한다
+   같은 기계이기는 해도 서로 다른거니까
+
+20250514
+    와일드카드 <?>의 제약 조건
+    1. extends <? extends Class>
+        이 Class와 Class를 상속받은 놈들만 사용 가능하다
+        ex) Student를 상속받는 HighStudent와 AcademyStudent가 있으면
+        <? extends Student> 하면 Student 를 상속받은 HighStudent 와 AcademyStudent 만 사용 가능
+    2. super <? super Class>
+        이 Class가 상속받고 있는 놈들만 사용 가능하다
+        ex) Student를 상속받는 HighStudent와 AcademyStudent가 있으면
+        <? super HighStudent> 하면 HighStudent 에게 상속해 주는 Student 만 사용 가능
+
+20250515
+    Stream
+    스트림 구성
+        1 단계 -> 스트림 생성
+        2 단계 -> 중간 연산 (조건에 맞는 데이터 구분, 데이타 값 수정, 정렬, 중복 제거, 제한, 건너뛰기) -> 스트림을 return 해주는 연산들
+        3 단계 -> 최종 연산 (반복, 결과 수집, 개수 조회, 매칭 여부, 검색, 합산) -> 스트림 외에 다른 자료형을 return 하는 연산들
+     
+    스트림 특징 -> 반복 중 뒤로 돌아갈 수 없다 (일회용이다)
+        numStream.forEach();     ->   이게 실행되면 스트림에서 값을 꺼내서 사용했기 때문에 이미 메모리는 비워진 상태임
+        numStream.findFirst();   ->   메모리에 남아있는게 없어서 실행 할 수 없음
+
+20250519
+    @ResponseBody   // 데이터로 응답하겠다, ViewResolver를 거치지 않겠다, 없으면 파일경로로 응답하겠다는 뜻
+    
+    HttpServletRequest 객체란?
+    외부에서 Tomcat 웹 서버로 요청시 생성되는 요청정보객체이다.
+
+20250520
+    GET : 주소에 값을 입력한다
+    파라미터를 통해 값을 입력한다
+    파라미터는 주소의 ? 뒤에 따라오는 key value 를 의미한다, 여러개 요청 시 & 로 구분
+    ex) http://localhost:8081/api/name2?name=qwer&age=20
+
+    POST : 가능한 json 으로 값을 입력한다
+    post 응답을 받으려면 @RequestBody 필수
+    ex)
+    "{
+        "key1" : "value1",
+        "key2" : "value2",
+        "key3" : {
+                key4 : value3,
+                key5 : ["a", "b", "c"]
+        }
+    }"
+
+    PUT : json 으로 값을 입력한다
+
+    DELETE : 경로에 값을 입력한다
+
+    @ResponseBody
+    데이터로 응답하겠다, ViewResolver를 거치지 않겠다, 없으면 파일경로로 응답하겠다는 뜻
+
+controller.IoCController
+    @Component + @AllargsConstructor
+    @Component 가 달려있으면 필요한 부품들(클래스 객체들)을 자동으로 생성해서 대입후 객체를 생성 해 준다
+        같은 기능을 하는 객체들을 new 로 만들어서 메모리 낭비하지 않고 알아서 생성해서 공유하며 사용해 준다
+    @Autowired      이거 만드는데 다른 부품들 필요 하니까 가져와서 만들어야돼 (@AllArgsConstructor 와 같은 기능)
+        @Component로 생성된 객체(부품) = bean
+
+

@@ -30,15 +30,15 @@ public class BasicController {
                         .collect(Collectors.joining())
                 +
                 """
-                    </body>
-                </html>
-                """;
+                            </body>
+                        </html>
+                        """;
     }
 
     @GetMapping("/index2")
     public String index2(Model model) {
         List<String> names = List.of("김준일", "김준이", "김준삼");
-        model.addAttribute("names",names);
+        model.addAttribute("names", names);
         return "index";
     }
 }

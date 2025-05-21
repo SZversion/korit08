@@ -74,4 +74,18 @@ controller.IoCController
     @Autowired      이거 만드는데 다른 부품들 필요 하니까 가져와서 만들어야돼 (@AllArgsConstructor 와 같은 기능)
         @Component로 생성된 객체(부품) = bean
 
+20250521
+    Component의 종류
+    1. @Component       ->  특정 기능이 정해져 있지 않은 객체
+    2. @Controller      ->  HTTP 요청 및 응답을 처리하는 객체
+    3. @Service         ->  비즈니스 로직 또는 메인로직을 담당하는 객체
+    4. @Repository      ->  DB와 관련된 로직을 담당하는 객체
+    5. @Configuration   ->  설정 로직을 담당하는 객체 + 직접생성 후 IoC 등록을 필요로 하는 Bean 설정
 
+    
+    DDL(Data Definition Language) - 데이터를 생성, 삭제하거나 구조를 변경하는 명령어
+        ex) CREATE, ALTER, DROP
+    DML(Data Manipulation Language) - 데이터를 처리하거나 조회, 검색하는 명령어
+        ex) INSERT, SELECT, UPDATE, DELETE
+    DCL(Data Control Language) - 데이터의 보안성 및 무결성을 제어하는 명령어(권한 설정 등)
+        ex) GRANT, REVOKE

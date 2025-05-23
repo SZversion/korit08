@@ -33,3 +33,18 @@ VALUES
 	(DEFAULT, '배수현', 27);
     
 SELECT * FROM student_tb;
+
+INSERT INTO class_register_tb
+	VALUES
+		(default, 3, 2),
+		(default, 1, 3),
+		(default, 3, 4),
+		(default, 3, 5),
+		(default, 2, 6),
+		(default, 1, 7),
+		(default, 1, 8),
+		(default, 2, 9),
+		(default, 3, 10),
+		(default, 1, 11);
+
+SELECT * FROM class_register_tb;

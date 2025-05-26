@@ -155,3 +155,7 @@
     IF (조건, true 일시 결과, false 일시 결과)
     IS NOT NULL
     NOT 은 IS NOT이 아니면 조건의 맨 앞에 붙는다
+
+### 20250526
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // = AutoIncrement
+    DB는 대소문자 구분 X

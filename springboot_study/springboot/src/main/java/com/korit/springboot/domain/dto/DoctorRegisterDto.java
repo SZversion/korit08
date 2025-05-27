@@ -8,9 +8,10 @@ public class DoctorRegisterDto {
     private String doctorName;
     private String departmentName;
 
-    public DoctorEntity toEntity() {
+    public DoctorEntity toEntity(Long departmentId) {
         return DoctorEntity.builder()
                 .doctorName(doctorName)
+                .doctorDepartment(departmentId)
                 .build();
     }
 }

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input[type=checkbox] {
+            display: none;
+        }
+        .chk1 {
+            position: relative;
+            display: inline-block;
+            border: 1px solid #dbdbdb;
+            border-radius: 50%;
+            width: 14px;
+            height: 14px;
+            cursor: pointer;
+        }
+        input[type=checkbox]:checked + .chk1::after{
+            content: "";
+            transform: translate(-50%, -50%);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            display: block;
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            background-color: #3d3aeb;
+        }
+    </style>
+</head>
+<body>
+    <form method="get" action="http://localhost:8080/api/test">
+        <label for="username">아이디</label>
+        <input type="text" id="username" name="username" placeholder="사용자 아이디를 입력하세요">
+        <span>비밀번호</span>
+        <input type="password" name="password" autofocus required>
+        <input type="text" name="name" value="readonly" readonly>
+        <div>
+            <input type="checkbox" id="agree1">
+            <label for="agree1" class="chk1"></label>
+            <label for="agree1">선택1</label>
+        </div>
+        <textarea name="" id=""></textarea>
+        <select name="" id="">
+            <option value="">선물1</option>
+            <option value="">선물2</option>
+            <option value="">선물3</option>
+            <option value="">선물4</option>
+            <option value="">선물5</option>
+        </select>
+        <button type="submit">전송</button>
+    </form>
+</body>
+</html>

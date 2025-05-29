@@ -1,0 +1,87 @@
+html {
+    font-size: 62.5;
+    background-color: #fafafa;
+}
+
+div > h1 + p {
+    color: red;
+}
+div > h2 + p {
+    color: green;
+}
+div > h1 ~ span {
+    color: blue;
+}
+
+.buttons {
+
+    & > div{
+        box-sizing: border-box;
+        border: 0.1rem solid #dbdbdb;
+        background-color: white;
+        width: fit-content;
+        padding: 0.5rem 0.1rem;
+    }
+    & > a{
+        
+    }
+    & > button{
+        
+    }
+}
+
+#button2:target {
+    width: 10rem;
+    height: 10rem;
+    background-color: red;
+}
+
+.check > input[type=checkbox] + label {
+    color: blue;
+}
+
+.check > input[type=checkbox]:checked + label {
+    color: red;
+}
+
+.check > input[type=radio] + label {
+    color: green;
+}
+
+.check > input[type=radio]:checked + label {
+    color: orange;
+}
+
+.menu-class {
+    & > li {
+        position: relative;
+        border: 0.1rem solid #dbdbdb;
+        width: fit-content;
+        cursor: pointer;
+
+        & > div {
+            display: none;
+            position: absolute;
+            top: 0;
+            right: -22rem;
+            background-color: yellow;
+            width: 20rem;
+        }
+
+        &:active > div{
+            display: block;
+        }
+    }
+}
+
+.menu-list li:nth-of-type(2n){
+    color: red;
+}
+
+.menu-list > li::before {
+    content: "menu"
+}
+
+.menu-list > li::after {
+    content: " -> "
+}

@@ -1,0 +1,63 @@
+html {
+    font-size: 62.5%;
+}
+
+.p-box {
+    position: relative;
+    box-sizing: border-box;
+    border: 0.1rem solid #222;
+    width: 30rem;
+    height: 30rem;
+}
+
+.c-box {
+    position: relative;
+    border-radius: 1rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.5s ease-in-out;
+    box-sizing: border-box;
+    border: 0.1rem solid #222;
+    width: 10rem;
+    height: 10rem;
+
+    &:hover {
+        transform: translate(-50%, -60%) scale(1.2);
+    }
+}
+
+@keyframes abox {
+    from {transform: scale(1)}
+    to {transform: scale(2)}
+}
+
+@keyframes bbox {
+    0% {transform: translateX(0);}
+    10% {transform: translateX(20%);}
+    20% {transform: translate(50%, 50%);}
+    100% {transform: translateX(100%);}
+}
+
+.a-box, .b-box {
+    position: relative;
+    left: 10rem;
+    box-sizing: border-box;
+    border: 0.1rem solid #222;
+    width: 10rem;
+    height: 10rem;
+}
+
+.a-box {
+    animation-name: abox;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.b-box {
+    animation-name: bbox;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}

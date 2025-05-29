@@ -1,0 +1,8 @@
+.bakcground-container {
+    background-image: url(../../html/사진/바탕화면원본.jpg);
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 1080px;
+}

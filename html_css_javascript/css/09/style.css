@@ -1,0 +1,19 @@
+html {
+    font-size: 62.5%;
+}
+
+.box1 {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    border: 0.1rem solid #222;
+    width: 30rem;
+    height: 20rem;
+}
+
+.box2 {
+    box-sizing: border-box;
+    border: 0.1rem solid #222;
+    width: 10rem;
+    height: 5rem;
+}

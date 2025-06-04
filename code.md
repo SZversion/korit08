@@ -159,3 +159,130 @@
 ### 20250526
     @GeneratedValue(strategy = GenerationType.IDENTITY) // = AutoIncrement
     DB는 대소문자 구분 X
+
+### 20250604
+#### 배열(Array)
+
+    const arr1 = [];
+    const arr2 = new Array();
+
+    arr1.push(10);
+    arr1.push(20);
+    arr1.push(30);
+    arr1.push(40);
+
+    arr2.push(10);
+    arr2.push(20);
+    arr2.push(30);
+    arr2.push(40);
+
+    console.log(arr1);
+    console.log(arr2);
+
+    console.log(arr1 == arr2);
+    console.log(arr1 === arr2);
+
+    const obj1 = {key1: "value1", key2: "value2"};
+    const obj2 = {key1: "value1", key2: "value2"};
+    console.log(obj1 === obj2);
+
+    // JSON
+    // JS 객체 또는 배열을 JSON 문자열로 변환 -> JSON.stringify();
+    // JSON 문자열을 JS객체 또는 배열로 변환  -> JSON.parse();
+    const json1 = JSON.stringify(arr1);
+    const json2 = JSON.stringify(arr2);
+    console.log(json1);
+    console.log(json2);
+    console.log(json1 === json2);
+
+    // 배열의 기본 내장 함수
+    const names = ['name1', 'name2', 'name3'];
+    // 값 추가
+    names.push('name4');
+    // 값 제거
+    console.log(names.pop());
+    // 값 수정
+    names.splice(1, 0, 'name5');    // 1번 index에서 0개 제거하고 name5 추가
+    console.log(names);
+    // 값 찾기
+    const findFx = n => n === 'name5';
+    const findName = names.find(findFx);;
+    console.log(findName);
+    const students = [
+        {name: 'name1', age: 31},
+        {name: 'name2', age: 32},
+        {name: 'name3', age: 33},
+        {name: 'name4', age: 34},
+        {name: 'name5', age: 35},
+    ];
+    console.log(students.find(s => s.name === 'name1'));
+    // 값 존재 유무
+    console.log(names.includes('name5'));   // return true, false
+
+    // 필터링
+    const numbers = [1, 2, 3, 4, 5, 6];
+    console.log(numbers.filter(n => n % 2 == 0));
+    console.log(students.filter(students => students.age === 32));
+
+    // 값 변경
+    console.log(numbers.map(n => n*10));    // 배열 값들에 반복 실행해서 그 값들을 모아서 새 배열을 만들어서 출력
+    console.log(students.map(student => {
+        if (student.age === 32) {
+            return {
+                name: student.name,
+            }
+        }
+        return student;
+    }))
+
+##### map 작동 방식
+```javascript
+function map(array, fx) {
+    const newArray = [];
+    for (let i = 0; i < array.length; i++) {
+        newArray.push = fx(array[i], i);
+    }
+    return newArray;
+};
+```
+
+##### filter 작동 방식
+```javascript
+const filter = (array, fx) => {
+    const newArray = [];
+    for(let i = 0; i < array.length; i++) {
+        if (fx(array[i])) {
+            newArray.push(array[i]);
+        }
+    }
+    return newArray;
+}
+```
+
+#### js의 논리 연산자
+    js에서는 AND 조건문의 앞부분이 true이면 연산자 뒷부분의 값을 리턴함
+    js에서는 OR 조건문의 앞부분이 flase이면 연산자 뒷부분의 값을 리턴함
+    ?? (Nullish coalescing) 조건문의 앞부분이 null, undifined이면 연산자 뒷부분의 값을 리턴함, 아니라면 앞의 값을 리턴
+#### Promise
+    비동기 함수들은 실행시 동기 순서로 큐에 등록이 되고 동기 동작이 끝나면 큐에 등록된 비동기 동작들이 실행됨
+    resolve 와 reject는 then과 catch에 parameter를 그대로 넘겨주고 then, catch 에서 정의한 함수에서 값들을 처리함
+    then 과 catch가 실행되면 then 이 우선적으로 실행 됨
+    then 이 큐에 등록은 되었는데 resolve가 없으면 다음 순서로 넘어가고 그 then절은 스킵됨
+#### async, await
+    async(비동기 함수 정의 키워드), await(비동기 함수 동기 호출 키워드)
+    await 키워드는 async 함수 안에서만 사용 가능, 단 전역 호출은 가능
+
+    async로 정의 하면 함수 내부에 있는 return 과 무관하게 무조건 promise를 return함 -> 함수에 then, catch 붙일수 있음
+    정상적으로 return 되면 resolve로 넘어가고 thorw로 예외가 발생하면 reject로 넘어감
+    
+    getUserById가 원래 return 하는건 Promise이지만, await을 붙여주면 Promise의 then에서 받을 값을 변수에 넣어준다
+    async 없으면 내부에서 await 못씀
+    await 쓰면서 catch 쓸거면 try-catch로 오류 제어 해야 함
+```javascript
+//30 + 31 라인과 같은 동작
+let user1 = await getUserById(1);   
+console.log("user1 :", user1);
+
+getUserById(1)
+.then(result => user1 = result);
+```

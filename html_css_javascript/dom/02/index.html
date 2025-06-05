@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style class="style">
+        .boxs {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            & > div {
+                box-sizing: border-box;
+                border: 1px solid #000;
+                width: 300px;
+                height: 300px;
+            }
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="boxs">
+        <div class="box1">
+    
+        </div>
+        <div class="box2">
+    
+        </div>
+    </div>
+    <div class="buttons">
+        <input type="text" class="color-input" placeholder="1번 박스 색상">
+        <input type="text" class="color-input" placeholder="2번 박스 색상">
+        <button class="submit">적용</button>
+        <button class="reset">초기화</button>
+    </div>
+    <script>
+        let headHTML = null;
+        window.onload = () => {
+            headHTML = document.querySelector("head").innerHTML;
+        }
+        
+        const submitButton = document.querySelector(".submit");
+        submitButton.onclick = () => {
+            const colorInputs = document.querySelectorAll(".color-input");
+            const colorInputLeftValue = colorInputs[0].value || "#fff";
+            const colorInputRightValue = colorInputs[1].value || "#fff";
+            const head = document.querySelector("head");
+            const boxBackground = document.querySelector(".box-background");
+            if(!!boxBackground) head.removeChild(boxBackground);
+            head.innerHTML += `<style class="box-background">
+                    .box1 {
+                        background-color: ${colorInputLeftValue};
+                    }
+                    .box2 {
+                        background-color: ${colorInputRightValue};
+                    }
+                </style>`
+        };
+        const resetButton = document.querySelector(".reset");
+        resetButton.onclick = () => {
+            const colorInputs = document.querySelectorAll(".color-input");
+            const colorInputLeftValue = colorInputs[0].value || "#fff";
+            const colorInputRightValue = colorInputs[1].value || "#fff";
+            const head = document.querySelector("head");
+            const boxBackground = document.querySelector(".box-background");
+            if(!!boxBackground) head.removeChild(boxBackground);
+        }
+    </script>
+</body>
+</html>

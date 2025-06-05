@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .top-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mid-box {
+            display: flex;
+            flex-direction: column;
+            & > input {
+                width: 100px;
+                text-align: center;
+            }
+        }
+
+        .left-box, .right-box {
+            box-sizing: border-box;
+            border: 1px solid #000;
+            width: 500px;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-container">
+        <ul class="left-box">
+        </ul>
+        <div class="mid-box">
+            <input type="text" class="book-number" placeholder="번호입력">
+            <button class="to-right-button">이동</button>
+            <button class="remove-button">삭제</button>
+        </div>
+        <ul  class="right-box">
+            
+        </ul>
+    </div>
+
+    <script>
+        // const bookList = [
+        //     { id:1, title: "자바스크립트 완벽 가이드", price: 38000 },
+        //     { id:2, title: "모던 자바스크립트 입문", price: 29000 },
+        //     { id:3, title: "리액트 실전 활용", price: 33000 },
+        //     { id:4, title: "스프링 부트 입문", price: 35000 },
+        //     { id:5, title: "알고리즘 문제 해결 전략", price: 42000 },
+        //     { id:6, title: "프로그래머를 위한 자료구조와 알고리즘", price: 31000 },
+        //     { id:7, title: "도메인 주도 설계", price: 47000 },
+        //     { id:8, title: "클린 코드", price: 39000 },
+        //     { id:9, title: "소프트웨어 장인", price: 36000 },
+        //     { id:10, title: "마이크로서비스 아키텍처", price: 40000 },
+        // ];
+        // const leftBox = document.querySelector(".top-container > .left-box");
+        // const rightBox = document.querySelector(".top-container > .right-box");
+        // const books = bookList.map((book, index) => {
+        //     return `<li>${index+1}. ${bookList[index].title} (${bookList[index].price}원)</li>`
+        // });
+        // leftBox.innerHTML += books.join("");
+
+        // const toRightButton = document.querySelector(".mid-box > .to-right-button");
+        // toRightButton.onclick = () => {
+        //     const number = document.querySelector(".book-number").value || 0;
+        //     const books = leftBox.querySelectorAll(`.left-box > li:has(span[class="index"])`);
+        //     const bookArray = Array.from(books);
+        //     const selectBook = bookArray.find(book => {
+        //         if(book.querySelector(".index").innerText === number) return book;
+        //     })
+        //     if(!selectBook) alert("올바른 번호를 입력하세요");
+        //     rightBox.appendChild(selectBook);
+        // };
+
+        
+        const bookList = [
+            { id:1, title: "자바스크립트 완벽 가이드", price: 38000 },
+            { id:2, title: "모던 자바스크립트 입문", price: 29000 },
+            { id:3, title: "리액트 실전 활용", price: 33000 },
+            { id:4, title: "스프링 부트 입문", price: 35000 },
+            { id:5, title: "알고리즘 문제 해결 전략", price: 42000 },
+            { id:6, title: "프로그래머를 위한 자료구조와 알고리즘", price: 31000 },
+            { id:7, title: "도메인 주도 설계", price: 47000 },
+            { id:8, title: "클린 코드", price: 39000 },
+            { id:9, title: "소프트웨어 장인", price: 36000 },
+            { id:10, title: "마이크로서비스 아키텍처", price: 40000 },
+        ];
+
+
+        window.onload = () => {
+            const leftBox = document.querySelector(".left-box");
+            leftBox.innerHTML = bookList.map(book => `<li>${book.id}. ${book.title}(${book.price}원)</li>`).join("");
+        }
+        function reload() {
+            const rightBox = document.querySelector(".right-box");
+            rightBox.innerHTML = selectedBookList.map(book => `<li>${book.id}. ${book.title}(${book.price}원)</li>`).join("");
+        }
+        let selectedBookList = [];
+
+        function isEmpty(str) {
+            if (!str)
+                alert("도서번호를 입력하세요");
+            return !str;
+        }
+
+
+        const toRightButton = document.querySelector(".mid-box > .to-right-button");
+        toRightButton.onclick = () => {
+            const numberInputValue = document.querySelector(".book-number").value;
+            isEmpty(numberInputValue);
+
+            const foundBook = bookList.find(book => book.id === parseInt(numberInputValue));
+
+            if(!foundBook) {
+                alert("해당 번호의 도서가 없습니다");
+                return;
+            }
+            if(!!selectedBookList.find(book => {book.id === parseInt(numberInputValue)})) {
+                alert("이미 존재하는 도서입니다");
+                return;
+            }
+
+            selectedBookList = [ ...selectedBookList, foundBook ];
+            reload();
+        }
+
+        const removeButton = document.querySelector(".mid-box > .remove-button");
+        removeButton.onclick = () => {
+            const numberInputValue = document.querySelector(".book-number").value;
+            isEmpty(numberInputValue);
+            
+            const foundBook = selectedBookList.find(book => book.id === parseInt(numberInputValue));
+
+            if(!foundBook) {
+                alert("해당 번호의 도서가 없습니다");
+                return;
+            }
+        
+            selectedBookList = selectedBookList.filter(book => {book.id !== parseInt(numberInputValue)});
+            
+            reload();
+        };
+    </script>
+</body>
+</html>

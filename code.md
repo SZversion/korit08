@@ -383,3 +383,13 @@ const jsx3 = (
 
     1. props 속성을 사용해서 전달
     2. props에 내장되어진 children 속성을 사용해서 전달
+
+### 20250610
+
+#### useState
+
+    useState는 0번 index가 값, 1번 index로 함수를 가진 배열을 리턴해주는 함수
+    Class useState<E>() {
+        private E value;
+        private function();
+    } 대충 이런 식

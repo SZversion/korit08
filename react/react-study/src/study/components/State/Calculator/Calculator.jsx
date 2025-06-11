@@ -15,37 +15,39 @@ function Calculator() {
       setNum(num + e.target.value);
     }
   };
-  const handlePlusOnClick = (e) => {
-    if (num !== "") {
-      setResult(result + parseInt(num));
-      setDisplayNum(displayNum + " + ");
-      setNum("");
-      setIsPlus(true);
-    }
+
+  const changeBoolean = () => {
+    setIsPlus((prev) => !prev);
   };
 
   const handleCalculateOnClick = (e) => {
     if (num !== "") {
-      if (e.target.value && setIsPlus) {
+      console.log(e.target.value);
+      console.log(isPlus);
+      let isPlusInput = JSON.parse(e.target.value);
+      if (isPlusInput && isPlus) {
         setResult(result + parseInt(num));
         setDisplayNum(displayNum + " + ");
         setNum("");
-        setIsPlus(false);
-      } else {
+        console.log("앞에거 더하고 + 추가");
+      } else if (!isPlusInput && isPlus) {
+        setResult(result + parseInt(num));
+        setDisplayNum(displayNum + " - ");
+        setNum("");
+        changeBoolean();
+        console.log("앞에거 더하고 - 추가");
+      } else if (isPlusInput && !isPlus) {
+        setResult(result - parseInt(num));
+        setDisplayNum(displayNum + " + ");
+        setNum("");
+        changeBoolean();
+        console.log("앞에거 빼고 + 추가");
+      } else if (!isPlusInput && !isPlus) {
         setResult(result - parseInt(num));
         setDisplayNum(displayNum + " - ");
         setNum("");
-        setIsPlus(true);
+        console.log("앞에거 빼고 - 추가");
       }
-    }
-  };
-
-  const handleMinusOnClick = (e) => {
-    if (num !== "") {
-      setResult(result - parseInt(num));
-      setDisplayNum(displayNum + " - ");
-      setNum("");
-      setIsPlus(false);
     }
   };
 
@@ -62,10 +64,10 @@ function Calculator() {
       <h1>입력 : {displayNum}</h1>
       <h1>결과 : {result}</h1>
       <div>
-        <button onClick={handlePlusOnClick} value={true}>
+        <button onClick={handleCalculateOnClick} value={true}>
           +
         </button>
-        <button onClick={handleMinusOnClick} value={false}>
+        <button onClick={handleCalculateOnClick} value={false}>
           -
         </button>
         <button onClick={hadleResultOnClick}>=</button>

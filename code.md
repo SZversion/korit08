@@ -393,3 +393,25 @@ const jsx3 = (
         private E value;
         private function();
     } 대충 이런 식
+
+### 20250611
+
+```jsx
+// default 는 {중괄호} 안쓰고 바로 import 가능, default는 어차피 하나밖에 없기 때문에 이름도 바꿔서 사용 가능(근데 바꿀 일 없음)
+import fxxxxxxx1, { fx2 } from "../ImportStudy/functions";
+
+// 이 파일 안에 있는거 전부 들고와서 f 라는 이름으로 바꿔서 사용
+import \* as f from "../ImportStudy/functions";
+```
+
+#### 마운트, 언마운트 관리 useEffect
+
+    useEffect -> 마운트(컴포넌트가 호출되어 return 값을 반환해서 화면을 랜더링 할 때) 될때 동작 할 부분을 정의하는 곳
+    return -> 언마운트(컴포넌트가 화면에서 사라질 때) 될때 동작 할 부분을 정의하는 곳
+
+#### Emotion (CSS in JS)
+
+    Emotion (CSS in JS 라이브러리)
+    주석으로 @jsxImportSource @emotion/react 추가해야 작동함
+    css 객체 import -> css`` 문자열로 css 작성
+    자동완성 안되니까 extension 으로 vscode-styled-components 설치

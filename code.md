@@ -415,3 +415,9 @@ import \* as f from "../ImportStudy/functions";
     주석으로 @jsxImportSource @emotion/react 추가해야 작동함
     css 객체 import -> css`` 문자열로 css 작성
     자동완성 안되니까 extension 으로 vscode-styled-components 설치
+
+### 20250612
+
+#### JavaScript filter
+
+    filter는 map과 비슷하게 작동하며 return 값이 boolean을 받고 그 값이 true이면 그 요소를 포함하고 false이면 배제한 배열을 반환한다

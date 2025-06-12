@@ -27,8 +27,8 @@ function App() {
       {/* <Effect2></Effect2> */}
       {/* <Emotion></Emotion> */}
       {/* <Emotion2></Emotion2> */}
-      <Effect3></Effect3>
-      {/* <Index></Index> */}
+      {/* <Effect3></Effect3> */}
+      <Index></Index>
     </div>
   );
 }

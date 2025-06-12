@@ -3,10 +3,10 @@ import IndexHeader from "../IndexHeader/IndexHeader";
 import * as s from "./styles";
 import React from "react";
 
-function IndexLayout({ children }) {
+function IndexLayout({ filter, setFilter, children, setSearchText }) {
   return (
     <div css={s.layout}>
-      <IndexHeader></IndexHeader>
+      <IndexHeader filter={filter} setFilter={setFilter} setSearchText={setSearchText}></IndexHeader>
       {children}
     </div>
   );

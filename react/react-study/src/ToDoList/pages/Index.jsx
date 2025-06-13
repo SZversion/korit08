@@ -47,6 +47,7 @@ function Index({ props }) {
       }
       return todo.content.includes(searchText);
     });
+    
 
   return (
     <IndexLayout filter={filter} setFilter={setFilter} setSearchText={setSearchText}>

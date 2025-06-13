@@ -408,6 +408,7 @@ import \* as f from "../ImportStudy/functions";
 
     useEffect -> 마운트(컴포넌트가 호출되어 return 값을 반환해서 화면을 랜더링 할 때) 될때 동작 할 부분을 정의하는 곳
     return -> 언마운트(컴포넌트가 화면에서 사라질 때) 될때 동작 할 부분을 정의하는 곳
+    useEffect는 함수 와 배열을 매개변수로 받음 이때 배열에는 바라보는 값을 넣으면 그 값이 변할때만 호출됨
 
 #### Emotion (CSS in JS)
 
@@ -421,3 +422,18 @@ import \* as f from "../ImportStudy/functions";
 #### JavaScript filter
 
     filter는 map과 비슷하게 작동하며 return 값이 boolean을 받고 그 값이 true이면 그 요소를 포함하고 false이면 배제한 배열을 반환한다
+
+### 20250613
+
+#### React Router
+
+    useNavigate()는 BrowserRouter 안에서만 작동하기 때문에 상위를 BrowserRouter로 잡아주어야 한다
+
+#### useNavigate
+
+    Link 태그를 사용하지 않아도 함수 안에서 경로를 이동 할 수 있게 해줌
+
+#### useLocation
+
+    location.pathname; // 현재 페이지의 경로를 리턴해줌
+    location.search; // 현재 페이지에 입력되는 변수(?뒤의 값) 을 반환함

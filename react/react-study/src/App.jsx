@@ -37,9 +37,11 @@ function App() {
       {/* <Router1></Router1> */}
       {/* <Router2></Router2> */}
       {/* <Router3></Router3> */}
-      <Router4></Router4>
+      {/* <Router4></Router4> */}
+      <MainRouter></MainRouter>
     </BrowserRouter>
   );
 }
+import MainRouter from "./RouterStudy/Auth/Routers/MainRouter";
 
 export default App;

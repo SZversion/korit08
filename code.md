@@ -437,3 +437,10 @@ import \* as f from "../ImportStudy/functions";
 
     location.pathname; // 현재 페이지의 경로를 리턴해줌
     location.search; // 현재 페이지에 입력되는 변수(?뒤의 값) 을 반환함
+
+### 20250616
+
+#### React Routes
+
+    Routes 내부는 조건문으로 실행됨 위에서 먼저 걸리는게 있으면 밑에는 실행 안됨
+    모든 Routes 끝에 NotFound 붙여줘야 맞지 않는 페이지에서 NotFound띄워 줄 수 있음

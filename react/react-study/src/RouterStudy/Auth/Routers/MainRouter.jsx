@@ -14,8 +14,8 @@ function MainRouter(props) {
       <Routes>
         {/* Routes 내부는 조건문으로 실행됨 위에서 먼저 걸리는게 있으면 밑에는 실행 안됨 */}
         <Route path="" element={<Home></Home>}></Route>
-        <Route path="/auth/*" element={<UnAuthRouter></UnAuthRouter>}></Route>
-        <Route path="/users/*" element={<AuthRouter></AuthRouter>}></Route>
+        <Route path="/auth/*" element={<AuthRouter></AuthRouter>}></Route>
+        <Route path="/users/*" element={<UnAuthRouter></UnAuthRouter>}></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
     </RootLayout>

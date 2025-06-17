@@ -16,7 +16,7 @@ function RootHeader(props) {
       {isLogin ? (
         <ul>
           <li>
-            <Link to={"/users/mypage"}>
+            <Link to={"/auth/mypage"}>
               <LuUser></LuUser>
             </Link>
           </li>
@@ -34,7 +34,7 @@ function RootHeader(props) {
             </Link>
           </li>
           <li>
-            <Link to={"/auth/signup"}>
+            <Link to={"/users/signup"}>
               <LuUserPlus></LuUserPlus>
             </Link>
           </li>

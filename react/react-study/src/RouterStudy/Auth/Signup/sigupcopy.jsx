@@ -1,18 +1,20 @@
 /** @jsxImportSource @emotion/react */
-import axios from "axios";
 import * as s from "./styles";
-
-import React, { useEffect, useRef, useState } from "react";
-import { MdOutlineCheckCircle } from "react-icons/md";
+import { useEffect, useRef, useState } from "react";
+import { MdOutlineCheckCircle, MdOutlineErrorOutline } from "react-icons/md";
 import { IoEye, IoEyeOff } from "react-icons/io5";
-import { VscError } from "react-icons/vsc";
-import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
+
+/**
+ *  유효성검사(Validation Check)
+ */
 
 function useSignInAndUpInput({ id, type, name, placeholder, value, valid }) {
   const STATUS = {
-    idle: "idle", // 초기 대기상태
-    success: "success", // 성공
-    error: "error", // 오류
+    idle: "idle",
+    success: "success",
+    error: "error",
   };
   const inputRef = useRef();
   const [inputValue, setInputValue] = useState(value);
@@ -57,7 +59,7 @@ function useSignInAndUpInput({ id, type, name, placeholder, value, valid }) {
         status={status}
         message={valid.message}
         inputRef={inputRef}
-      ></SignInAndUpInput>
+      />
     ),
   };
 }
@@ -91,15 +93,15 @@ function SignInAndUpInput({
         {status !== "idle" &&
           (status === "success" ? (
             <div>
-              <MdOutlineCheckCircle></MdOutlineCheckCircle>
+              <MdOutlineCheckCircle />
             </div>
           ) : (
             <div>
-              <VscError></VscError>
+              <MdOutlineErrorOutline />
             </div>
           ))}
       </div>
-      <InputValidatedMessage status={status} message={message}></InputValidatedMessage>
+      <InputValidatedMessage status={status} message={message} />
     </div>
   );
 }
@@ -113,17 +115,12 @@ function usePasswordInputHiddenButton() {
 
   return {
     isShow,
-    element: (
-      <PasswordInputHiddenButton
-        isShow={isShow}
-        onClick={handleOnClick}
-      ></PasswordInputHiddenButton>
-    ),
+    element: <PasswordInputHiddenButton isShow={isShow} onClick={handleOnClick} />,
   };
 }
 
 function PasswordInputHiddenButton({ isShow, onClick }) {
-  return <p onClick={onClick}>{isShow ? <IoEyeOff></IoEyeOff> : <IoEye></IoEye>}</p>;
+  return <p onClick={onClick}>{isShow ? <IoEyeOff /> : <IoEye />}</p>;
 }
 
 function InputValidatedMessage({ status, message }) {
@@ -144,13 +141,12 @@ function Signin(props) {
       id: 1,
       type: "text",
       name: "username",
-      placeholder: "사용자 이름",
-      // location.state 를 사용하면 navigate에서 넘겨준 state값을 받아온다
+      placeholder: "사용자이름",
       value: location.state?.username || "",
       valid: {
         enabled: true,
-        regex: /^(?=.*[a-zA-Z])[A-Za-z0-9]{4,20}$/,
-        message: "아이디는 영문 또는 숫자를 포함한 2~20자 입니다.",
+        regex: /^(?=.*[a-z])(?=.*\d).{4,20}$/,
+        message: "아이디는 영문, 숫자를 포함 4~20자여야 합니다.",
       },
     },
     {
@@ -161,17 +157,19 @@ function Signin(props) {
       value: location.state?.password || "",
       valid: {
         enabled: true,
-        regex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,20}$/,
-        message: "비밀번호는 영문 대소문자와 특수문자를 포함하는 8~20자 입니다.",
+        regex: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]).{8,20}$/,
+        message: "비밀번호는 8~20자이며, 영문·숫자·특수문자를 모두 포함해야 합니다.",
       },
     },
   ];
 
   const inputItems = inputs.map((input) => useSignInAndUpInput(input));
+  // [input, input] -> [useSignInAndUpInput(리턴값), useSignInAndUpInput(리턴값)]
 
   useEffect(() => {
     inputItems.forEach((inputItem) => {
       inputItem.ref.current.focus();
+      inputItem.ref.current.blur();
     });
   }, []);
 
@@ -182,7 +180,7 @@ function Signin(props) {
   const handleRegisterOnClick = async () => {
     const url = "http://localhost:8080/api/users";
 
-    let data = {}; // dto 와 형태(key값)가 같아야 함
+    let data = {};
 
     inputItems.forEach((inputItem) => {
       data = {
@@ -195,7 +193,7 @@ function Signin(props) {
       await axios.post(url, data);
       alert("사용자 등록 완료");
     } catch (error) {
-      alert("사용자 등록 실패");
+      alert("사용자 등록 오류");
     }
   };
 
@@ -206,7 +204,7 @@ function Signin(props) {
         {inputItems.map((inputItem) => inputItem.element)}
       </div>
       <button css={s.submitButton} disabled={submitDisabled} onClick={handleRegisterOnClick}>
-        로그인
+        로그인하기
       </button>
     </div>
   );
@@ -214,7 +212,7 @@ function Signin(props) {
 
 export default Signin;
 
-/** gpt로 정규표현식 만들기
- * usename, password, checkpassword, fullname, email
- * javascript 정규 표현식을 각각 만들어주고 error 메세지도 만들어줘
+/**
+ * username, password, checkpassword, fullname(한글), email
+ * javascript 정규표현식을 각각 만들어주고 error메세지도 만들어줘
  */

@@ -451,3 +451,7 @@ import \* as f from "../ImportStudy/functions";
 #### useLocation
 
     location.state 를 사용하면 navigate에서 넘겨준 state값을 받아온다
+
+### 20250618
+    @Builder 는 @AllArgsConstructor 반드시 있어야됨
+    @Entity 는 @NoArgsConstructor 반드시 있어야됨

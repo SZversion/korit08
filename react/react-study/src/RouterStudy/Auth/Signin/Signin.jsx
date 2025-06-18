@@ -180,7 +180,7 @@ function Signin(props) {
   }, [inputItems]);
 
   const handleRegisterOnClick = async () => {
-    const url = "http://localhost:8080/api/users";
+    const url = "http://localhost:8080/api/users/login";
 
     let data = {}; // dto 와 형태(key값)가 같아야 함
 
@@ -193,9 +193,8 @@ function Signin(props) {
 
     try {
       await axios.post(url, data);
-      alert("사용자 등록 완료");
     } catch (error) {
-      alert("사용자 등록 실패");
+      alert("로그인 실패");
     }
   };
 

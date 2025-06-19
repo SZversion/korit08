@@ -136,8 +136,10 @@ function InputValidatedMessage({ status, message }) {
   return <></>;
 }
 
-function Signin(props) {
+function Signin() {
+  const navigate = useNavigate();
   const location = useLocation();
+  const { setValue: setRefresh } = useRefreshStore();
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const inputs = [
     {
@@ -149,7 +151,7 @@ function Signin(props) {
       value: location.state?.username || "",
       valid: {
         enabled: true,
-        regex: /^(?=.*[a-zA-Z])[A-Za-z0-9]{4,20}$/,
+        regex: /^(?=.*[a-zA-Z])[A-Za-z0-9]{2,20}$/,
         message: "아이디는 영문 또는 숫자를 포함한 2~20자 입니다.",
       },
     },
@@ -192,8 +194,16 @@ function Signin(props) {
     });
 
     try {
-      await axios.post(url, data);
+      const response = await axios.post(url, data);
+      const accessToken = response.data?.accessToken;
+      if (!!accessToken) {
+        localStorage.setItem("AccessToken", accessToken);
+        setRefresh(() => true);
+        navigate("/");
+      }
     } catch (error) {
+      const { response, status } = error;
+      console.log(response.data);
       alert("로그인 실패");
     }
   };

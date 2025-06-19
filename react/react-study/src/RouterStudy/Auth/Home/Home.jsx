@@ -5,7 +5,9 @@ import * as s from "./styles";
 function Home(props) {
   return (
     <div css={s.layout}>
-      <main></main>
+      <main>
+        
+      </main>
     </div>
   );
 }

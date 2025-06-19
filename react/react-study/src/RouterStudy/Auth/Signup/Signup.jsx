@@ -134,7 +134,7 @@ function Signup(props) {
       value: "",
       valid: {
         enabled: true,
-        regex: /^(?=.*[a-zA-Z])[A-Za-z0-9]{4,20}$/,
+        regex: /^(?=.*[a-zA-Z])[A-Za-z0-9]{2,20}$/,
         message: "아이디는 영문 또는 숫자를 포함한 2~20자 입니다.",
       },
     },

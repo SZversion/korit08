@@ -7,6 +7,8 @@ import { MdOutlineCheckCircle } from "react-icons/md";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { VscError } from "react-icons/vsc";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useRefreshStore } from "../stores/storeStudy";
+import { useQueryClient } from "@tanstack/react-query";
 
 function useSignInAndUpInput({ id, type, name, placeholder, value, valid }) {
   const STATUS = {
@@ -140,6 +142,7 @@ function Signin() {
   const navigate = useNavigate();
   const location = useLocation();
   const { setValue: setRefresh } = useRefreshStore();
+  const queryClient = useQueryClient();
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const inputs = [
     {
@@ -199,11 +202,14 @@ function Signin() {
       if (!!accessToken) {
         localStorage.setItem("AccessToken", accessToken);
         setRefresh(() => true);
+        queryClient.invalidateQueries({
+          queryKey: ["principalUserQuery"],
+        });
         navigate("/");
       }
     } catch (error) {
       const { response, status } = error;
-      console.log(response.data);
+      console.log("respone :", response.data);
       alert("로그인 실패");
     }
   };

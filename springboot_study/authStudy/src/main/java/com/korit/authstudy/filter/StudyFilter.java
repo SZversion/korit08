@@ -22,6 +22,7 @@ public class StudyFilter implements Filter {
     System.out.println("전처리");
     filterChain.doFilter(servletRequest, servletResponse);  // 컨트롤러 호출 부분
     System.out.println("후처리");
+    System.out.println("-----------------------------");
   }
 
 }

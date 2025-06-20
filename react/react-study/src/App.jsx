@@ -15,6 +15,17 @@ import Router3 from "./RouterStudy/Router3/Router3";
 import Router4 from "./RouterStudy/Router4/Router4";
 
 function App() {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        // refetchOnWindowFocus: false, // 다른 탭 갔다가 오면 재요청
+        retry: 0, // 응답 없으면 다시 요청 할 횟수
+        staleTime: 1000 * 60, // 포커스 들어오고 3초 지나고 딴데 갔다오면 재요청
+        gcTime: 6000 * 10, // 가비지컬렉터 동작 시간 이 시간 지나면 캐시 지움
+      },
+    },
+  });
+
   return (
     <BrowserRouter>
       {/* <HelloReact></HelloReact> */}
@@ -38,10 +49,15 @@ function App() {
       {/* <Router2></Router2> */}
       {/* <Router3></Router3> */}
       {/* <Router4></Router4> */}
-      <MainRouter></MainRouter>
+      {/* <MainRouter></MainRouter> */}
+      <QueryClientProvider client={queryClient}>
+        <MainRouterReactQuery></MainRouterReactQuery>
+      </QueryClientProvider>
     </BrowserRouter>
   );
 }
 import MainRouter from "./RouterStudy/Auth/Routers/MainRouter";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import MainRouterReactQuery from "./RouterStudy/Auth/Routers/MainRouterReactQuery";
 
 export default App;

@@ -55,7 +55,12 @@ public class SecurityConfig {
     // 특정 요청 URL에 대한 권한 설정
     http.authorizeHttpRequests(auth -> {
 //      auth.anyRequest().permitAll();
-      auth.requestMatchers("/api/users", "api/users/login", "api/users/login/status").permitAll();
+      auth.requestMatchers(
+        "/api/users",
+        "api/users/login",
+        "api/users/login/status",
+        "/api/users/principal"
+      ).permitAll();
       auth.anyRequest().authenticated();
     });
     // HttpSecurity 객체에 설정한 모든 정보를 기반으로 build 해서 SecurityFilterChain 객체 생성 후 Bean 등록

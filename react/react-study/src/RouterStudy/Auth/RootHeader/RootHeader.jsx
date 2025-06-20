@@ -4,14 +4,20 @@ import * as s from "./styles";
 
 import React, { useState } from "react";
 import { LuLogOut, LuUser, LuUserPlus } from "react-icons/lu";
+import { useQueryClient } from "@tanstack/react-query";
+import { CiLogin } from "react-icons/ci";
 
-function RootHeader({ isLogin, setLogin }) {
+function RootHeader() {
+  const queryClient = useQueryClient();
+  const authentication = queryClient.getQueryData(["principalUserQuery"]).data;
+  const principal = authentication.principal;
+
   return (
     <header css={s.layout}>
       <h1>
         <Link to={"/"}>사이트 로고</Link>
       </h1>
-      {isLogin ? (
+      {principal !== "anonymousUser" ? (
         <ul>
           <li>
             <Link to={"/auth/mypage"}>
@@ -28,7 +34,7 @@ function RootHeader({ isLogin, setLogin }) {
         <ul>
           <li>
             <Link to={"/users/signin"}>
-              <LuUser></LuUser>
+              <CiLogin></CiLogin>
             </Link>
           </li>
           <li>

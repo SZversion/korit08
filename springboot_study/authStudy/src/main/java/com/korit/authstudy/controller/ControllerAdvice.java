@@ -1,6 +1,7 @@
 package com.korit.authstudy.controller;
 
 import com.korit.authstudy.exception.BearerValidException;
+import com.korit.authstudy.exception.MyAccountException;
 import io.jsonwebtoken.JwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,4 +26,9 @@ public class ControllerAdvice {
   public ResponseEntity<?> jwtError(JwtException exception) {
     return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());
   } // 키 값이 위조됐거나, 만료되었을때
+
+  @ExceptionHandler(MyAccountException.class)
+  public ResponseEntity<?> isNotMyAccount(MyAccountException exception) {
+    return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getErrorMessage());
+  }
 }

@@ -43,8 +43,8 @@ public class JwtAuthenticationFilter implements Filter {
       return;
     }
 
-    String authorization = request.getHeader(
-      "Authorization");  // 헤더에서 Authorization(토큰 들어있는 곳) 꺼내서 토큰 확인
+    // 헤더에서 Authorization(토큰 들어있는 곳) 꺼내서 토큰 확인
+    String authorization = request.getHeader("Authorization");
     System.out.println("Bearer 토큰 : " + authorization);
     if (jwtUtil.isBearer(authorization)) {
       String accessToken = jwtUtil.removeBearer(authorization);
@@ -59,15 +59,19 @@ public class JwtAuthenticationFilter implements Filter {
             .userId(user.getId())
             .username(user.getUsername())
             .password(user.getPassword())
+            .fullName(user.getFullName())
+            .email(user.getEmail())
             .build();
           Authentication authentication = new UsernamePasswordAuthenticationToken(
             principalUser,
             "",
             principalUser.getAuthorities()
           );
-          SecurityContextHolder.getContext().setAuthentication(
-            authentication); // SecurityContextHolder 에다가 authentication 넣었다 = 로그인 됐다
+
+          // SecurityContextHolder 에다가 authentication 넣었다 = 로그인 됐다
+          SecurityContextHolder.getContext().setAuthentication(authentication);
           System.out.println("인증 성공");
+          System.out.println(authentication);
           System.out.println(authentication.getName());
         }, () -> {
           throw new AuthenticationServiceException("인증 실패");
